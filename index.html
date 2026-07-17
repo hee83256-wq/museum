@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>River of History | Historical Context Digital Museum</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Georgia, serif;
+    background: #efe3c2;
+    color: #2d2118;
+    line-height: 1.7;
+}
+
+header {
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(35,25,15,.72), rgba(35,25,15,.72)),
+        url("images/huckleberry-finn-cover.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: rgb(252, 251, 251);
+    padding: 30px;
+}
+
+.hero {
+    max-width: 950px;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 7vw, 6rem);
+    margin-bottom: 10px;
+    text-shadow: 3px 3px 8px black;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+}
+
+button,
+.video-button {
+    display: inline-block;
+    background: #6f3f24;
+    color: white;
+    border: none;
+    padding: 14px 22px;
+    margin: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+button:hover,
+.video-button:hover {
+    background: #9b633d;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #382519;
+    padding: 12px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 12px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #e9c994;
+}
+
+section {
+    padding: 70px 8%;
+    max-width: 1300px;
+    margin: auto;
+}
+
+section h2 {
+    font-size: 2.5rem;
+    border-bottom: 3px solid #8d5a36;
+    padding-bottom: 12px;
+}
+
+.intro {
+    font-size: 1.15rem;
+    line-height: 1.9;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px;
+    align-items: stretch;
+}
+
+.card {
+    background: #fff9e9;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.2);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.card img {
+    width: 100%;
+    height: 250px;
+    object-fit: contain;
+    background: #ddd0ad;
+    border-radius: 8px;
+    margin-bottom: 18px;
+}
+
+.card h3 {
+    color: #6f3f24;
+    margin-top: 5px;
+}
+
+.card p {
+    flex-grow: 1;
+}
+
+.card button {
+    align-self: center;
+    margin-top: auto;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    background: #fffdf7;
+    padding: 25px;
+    margin: 25px 0;
+    border-radius: 12px;
+}
+
+.timeline-item img {
+    width: 220px;
+    height: 150px;
+    object-fit: contain;
+    background: #eee4c9;
+    border-radius: 8px;
+}
+
+.timeline-text {
+    flex: 1;
+}
+
+.history-image {
+    display: block;
+    width: 300px;
+    height: 450px;
+    object-fit: contain;
+    margin: 25px auto;
+    border-radius: 10px;
+}
+
+.twain-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 25px 0;
+}
+
+.twain-images img {
+    width: 220px;
+    height: 160px;
+    object-fit: contain;
+    background: #eee4c9;
+    border-radius: 10px;
+}
+
+@media (max-width: 700px) {
+    .twain-images img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.student-narration {
+    color: #2d2118;
+    background: #fff9e9;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.event {
+    margin-bottom: 30px;
+    background: #fff9e9;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.event strong {
+    color: #8d4d27;
+    font-size: 1.3rem;
+}
+
+.document {
+    background: #e9d5a5;
+    padding: 25px;
+    border: 2px solid #87623c;
+    font-family: "Courier New", monospace;
+    line-height: 1.7;
+}
+
+.quote {
+    font-size: 1.4rem;
+    font-style: italic;
+    background: #d8bd88;
+    padding: 25px;
+    border-left: 8px solid #6f3f24;
+}
+
+.video-card {
+    text-align: center;
+}
+
+.video-card img {
+    max-width: 450px;
+    width: 100%;
+    border-radius: 12px;
+}
+
+footer {
+    background: #382519;
+    color: white;
+    padding: 40px;
+    text-align: center;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 20;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.8);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background: #fff9e9;
+    color: #2d2118;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 900px;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.modal-content h2 {
+    color: #6f3f24;
+}
+
+.modal-content p {
+    color: #2d2118;
+}
+
+/* Image and text side-by-side */
+.room-layout {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.room-layout img {
+    width: 45%;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.room-text {
+    flex: 1;
+}
+
+/* For smaller screens */
+@media (max-width: 700px) {
+    .room-layout {
+        flex-direction: column;
+    }
+
+    .room-layout img {
+        width: 100%;
+    }
+}
+
+.modal-content img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.close {
+    float: right;
+    font-size: 30px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header id="home">
+
+<div class="hero">
+
+<h1>River of History</h1>
+
+<p>
+A Historical Context Digital Museum for
+<i>The Adventures of Huckleberry Finn</i>
+</p>
+
+<p>
+Step into the historical world of the 1830s and 1840s and explore the
+Mississippi River, the communities that depended on it, the system of
+slavery that shaped American society, and the experiences that influenced
+Mark Twain's writing.
+
+This digital museum connects the historical background of the American
+South to the characters, setting, conflicts, and themes found in
+<i>The Adventures of Huckleberry Finn</i>.
+</p>
+
+<button onclick="document.getElementById('museum').scrollIntoView()">
+Enter the Museum
+</button>
+
+<button onclick="speakIntro()">
+🔊 Hear Introduction
+</button>
+
+</div>
+
+</header>
+
+<nav>
+
+<a href="#museum">Museum Rooms</a>
+<a href="#timeline">Timeline</a>
+<a href="#river">Mississippi River</a>
+<a href="#slavery">Slavery</a>
+<a href="#twain">Mark Twain</a>
+<a href="#documents">Documents</a>
+<a href="#video">Video Exhibit</a>
+
+</nav>
+
+<section id="museum">
+
+<h2>🏛️ Museum Rooms</h2>
+
+<p class="intro">
+
+Welcome to the Museum Rooms. Each room presents a different part of the
+historical world surrounding <i>The Adventures of Huckleberry Finn</i>.
+
+As you explore, you will learn about the importance of the Mississippi
+River, the development of river towns and steamboat transportation, the
+experiences of enslaved people, Mark Twain's personal connection to the
+river, and the historical events that help readers understand the novel.
+
+Together, these exhibits show that the setting of the novel is connected
+to real people, real places, and important historical issues in
+nineteenth-century American society.
+
+</p>
+
+<div class="grid">
+
+<div class="card">
+
+<img src="images/huckleberry-finn-cover.png"
+alt="The Adventures of Huckleberry Finn book cover">
+
+<h3>Room 1: The Novel</h3>
+
+<p>
+Explore the historical setting and major themes of
+<i>The Adventures of Huckleberry Finn</i>. Learn how Mark Twain uses Huck
+and Jim's journey to examine freedom, slavery, morality, society, and
+individual choice.
+
+The novel's setting along the Mississippi River reflects the
+transportation, communities, social customs, and conflicts of the
+nineteenth-century American South.
+</p>
+
+<button onclick="openModal('novel')">
+Explore Room
+</button>
+
+</div>
+
+<div class="card">
+
+<img
+src="images/huckleberry-finn-steamboat.jpg"
+alt="Historical steamboat on the Mississippi River">
+
+<h3>Room 2: River Life</h3>
+
+<p>
+Discover how the Mississippi River influenced transportation, trade,
+employment, communication, and everyday life.
+
+Steamboats carried passengers and goods between river communities, while
+pilots, deckhands, merchants, farmers, and other workers depended on the
+river for their livelihoods.
+</p>
+
+<button onclick="openModal('river')">
+Explore Room
+</button>
+
+</div>
+
+<div class="card">
+
+<img
+src="images/mississippi-river-map.png"
+alt="Map of Huck and Jim's journey">
+
+<h3>Room 3: The Journey</h3>
+
+<p>
+Follow Huck and Jim's journey down the Mississippi River and explore how
+their travels connect to the history of the region.
+
+Their journey becomes more than physical travel; it also represents a
+search for freedom, safety, and independence.
+</p>
+
+<button onclick="openModal('journey')">
+Explore Room
+</button>
+
+</div>
+
+<div class="card">
+<img
+src="images/slave-auctioning.jpg"
+alt="Historical image representing the history of slavery"
+
+<h3>Room 4: Voices of History</h3>
+
+<p>
+Explore the experiences of enslaved people and learn about the system of
+slavery that shaped the economy, laws, families, and communities of the
+United States.
+
+This room provides historical context for Jim's desire for freedom and
+helps visitors understand the serious social and moral issues present
+throughout the novel.
+</p>
+
+<button onclick="openModal('slavery')">
+Explore Room
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="timeline">
+
+    <h2>📜 Historical Timeline</h2>
+
+    <div class="timeline-item">
+
+        <img
+            src="images/huckleberry-finn-steamboat.jpg"
+            alt="Steamboat traveling on the Mississippi River"
+        >
+
+        <div class="timeline-text">
+
+            <h3>1830s</h3>
+
+            <p>
+                During the 1830s, the Mississippi River served as one of the
+                most important transportation and trade routes in the United
+                States. Steamboats connected communities and carried passengers,
+                agricultural products, and other goods. River commerce played a
+                major role in the economy of the American South.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="timeline-item">
+
+        <img
+            src="images/samuel-clemens-childhood.png"
+            alt="Historical illustration representing Samuel Clemens's early life"
+        >
+
+        <div class="timeline-text">
+
+            <h3>1835</h3>
+
+            <p>
+                Samuel Langhorne Clemens was born in Florida, Missouri. He later
+                became famous as the writer Mark Twain. His childhood and later
+                experiences along the Mississippi River became important influences
+                on his writing.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="timeline-item">
+
+        <img
+            src="images/mississippi-river-communities.jpg"
+            alt="Historical Mississippi River town and communities"
+        >
+
+        <div class="timeline-text">
+
+            <h3>1840s</h3>
+
+            <p>
+                River towns and communities along the Mississippi continued to
+                grow. Transportation and trade connected different regions, while
+                slavery continued to shape the economy and social structure of
+                the American South. These historical conditions became important
+                background for the world represented in the novel.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="timeline-item">
+
+        <img
+            src="images/mark-twain-riverboat.jpg"
+            alt="Mark Twain's early experiences on the Mississippi River"
+        >
+
+        <div class="timeline-text">
+
+            <h3>1850s–1860s</h3>
+
+            <p>
+                As a young man, Mark Twain worked on the Mississippi River and
+                became a riverboat pilot. His firsthand knowledge of river travel,
+                river towns, steamboats, and the people who lived along the river
+                later influenced his writing and descriptions of the Mississippi.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="timeline-item">
+
+        <img
+            src="images/huckleberry-finn-publication.JPG"
+            alt="Historical cover of The Adventures of Huckleberry Finn"
+        >
+
+        <div class="timeline-text">
+
+            <h3>1884–1885</h3>
+
+            <p>
+                The Adventures of Huckleberry Finn was published. Although the
+                novel was written decades after the period in which its story
+                takes place, it reflects important questions about freedom,
+                slavery, morality, society, and life along the Mississippi River.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="river">
+
+    <h2>🌊 Mississippi River Life</h2>
+
+    <p class="intro">
+
+        The Mississippi River was much more than a background location in
+        nineteenth-century America. It was a major transportation route, a
+        center of commerce, a source of employment, and an important part of
+        everyday life.
+
+        Steamboats made it possible for people and goods to travel more
+        quickly along the river. River communities developed around
+        transportation and trade, creating busy places where travelers,
+        merchants, workers, and families interacted.
+
+        In <i>The Adventures of Huckleberry Finn</i>, the river is also
+        connected to the idea of freedom. Huck and Jim use the river as a path
+        of escape, but their journey is not always safe or easy.
+
+    </p>
+
+    <div class="grid">
+
+        <div class="card">
+
+            <img
+                src="images/mississippi-river-steanboat.jpg"
+                alt="Historical steamboat traveling on the Mississippi River"
+            >
+
+            <h3>🚢 Steamboats</h3>
+
+            <p>
+                Steamboats transformed transportation on the Mississippi River.
+                They carried passengers, agricultural products, food, supplies,
+                and other goods between communities.
+
+                Although steamboats made travel faster, river travel could
+                still be dangerous because of changing water levels, hidden
+                obstacles, strong currents, storms, and collisions.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <img
+                src="images/mississippi-river-town.jpg"
+                alt="Historical Mississippi River community"
+            >
+
+            <h3>🏘️ River Towns</h3>
+
+            <p>
+                River towns developed around trade and transportation. These
+                communities were places where people bought and sold goods,
+                loaded and unloaded cargo, searched for work, and traveled to
+                other destinations.
+
+                The towns along the river brought together people from
+                different backgrounds and social classes.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <img
+                src="images/mississippi-riverboat-workers.jpg"
+                alt="Historical riverboat workers"
+            >
+
+            <h3>⚓ Work on the River</h3>
+
+            <p>
+                Many different types of workers depended on the Mississippi
+                River. Riverboat pilots guided boats through difficult waters,
+                while deckhands performed physical labor.
+
+                Merchants, farmers, traders, laborers, and other workers also
+                depended on the river's transportation and commercial systems.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <img
+                src="images/mississippi-river.jpg"
+                alt="Historical landscape of the Mississippi River"
+            >
+
+            <h3>🌅 Life Along the River</h3>
+
+            <p>
+                The Mississippi River shaped the daily lives of people living
+                near its banks. Communities depended on the river for
+                transportation, trade, communication, and employment.
+
+                The river was also unpredictable. Floods, storms, accidents,
+                and changing water conditions could make travel difficult and
+                dangerous.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="slavery">
+
+    <h2>⚖️ Slavery and Enslaved People</h2>
+
+    <!-- PUT THE IMAGE HERE -->
+    <img
+        src="images/slavery-history.jpg"
+        class="history-image"
+    >
+
+    <!-- Then your text -->
+
+<div class="quote">
+
+The historical world of the novel was shaped by a society in which slavery
+was a powerful legal, economic, and social system.
+
+</div>
+
+<p class="intro">
+
+Slavery was a system in which enslaved people were denied personal freedom
+and were legally treated as property. Enslaved people were forced to work,
+and families could be separated through sale or other circumstances.
+
+Slavery affected nearly every part of society, including the economy,
+laws, families, communities, and relationships between people. The
+experiences of enslaved people are essential to understanding the
+historical context of the novel.
+
+</p>
+
+<p class="intro">
+
+Jim's desire to escape slavery and reach freedom is one of the most
+important historical elements of <i>The Adventures of Huckleberry Finn</i>.
+His journey encourages readers to think about the difference between
+written laws and moral decisions, as well as the human consequences of
+slavery.
+
+</p>
+
+<button onclick="speakSlavery()">
+🔊 Listen to Explanation
+</button>
+
+</section>
+
+<section id="twain">
+
+<section id="twain">
+
+    <h2>✍️ Mark Twain's Background</h2>
+
+    <div class="twain-images">
+
+        <img
+            src="images/mark-twain-portrait.jpg"
+            alt="Historical portrait of Mark Twain"
+        >
+
+        <img
+            src="images/mark-twain-riverboat.jpg"
+            alt="Historical image representing Mark Twain's life on the Mississippi River"
+        >
+
+        <img
+            src="images/mississippi-river-steanboat.jpg"
+            alt="Mississippi River landscape"
+        >
+
+    </div>
+
+    <p class="intro">
+        Mark Twain was the pen name of Samuel Langhorne Clemens, an American
+        author and humorist. He was born in 1835 in Florida, Missouri, and
+        grew up near the Mississippi River.
+    </p>
+
+    <p class="intro">
+        Twain's experiences along the Mississippi River strongly influenced
+        his writing. Before becoming a famous author, he worked as a printer,
+        journalist, and riverboat pilot.
+    </p>
+
+    <p class="intro">
+        His experiences with river travel, river towns, and the people he met
+        helped him create the setting and characters found in
+        <i>The Adventures of Huckleberry Finn</i>.
+    </p>
+
+</section>
+
+<section id="documents">
+
+<h2>📄 Historical Documents</h2>
+
+<div class="document">
+
+<h3>Document 1: Riverboat Culture</h3>
+
+<p>
+The Mississippi River connected communities across a large region.
+Transportation by river allowed people and goods to travel between towns
+and helped support trade and economic activity.
+
+Riverboats were an important part of nineteenth-century life. They
+carried passengers and cargo while creating jobs for pilots, deckhands,
+merchants, and other workers. The importance of river transportation
+helps explain why the Mississippi River is such an important setting in
+Mark Twain's writing.
+</p>
+
+</div>
+
+<br>
+
+<div class="document">
+
+<h3>Document 2: Historical Context</h3>
+
+<p>
+The world represented in <i>The Adventures of Huckleberry Finn</i> was
+shaped by several major historical forces. Slavery and racial inequality
+influenced the lives of individuals and communities, while the Mississippi
+River supported transportation, trade, and communication.
+
+Understanding this historical context helps readers understand why
+freedom is such an important theme in the novel and why Huck and Jim's
+journey has meaning beyond simply traveling down a river.
+</p>
+
+</div>
+
+</section>
+
+<section id="video">
+
+<h2>🎥 Video Exhibit: Exploring Mark Twain and the Mississippi River</h2>
+
+<p class="intro">
+
+This video exhibit provides additional historical background about Mark
+Twain, the Mississippi River, and the society that influenced the setting
+of <i>The Adventures of Huckleberry Finn</i>.
+
+As you watch, consider how the Mississippi River influenced transportation,
+trade, travel, and the daily lives of people living along its banks. Also
+think about how Mark Twain's personal experiences on the river helped
+shape his understanding of American society and later influenced his
+writing.
+
+</p>
+
+<div class="card video-card">
+
+    <a
+        href="https://youtu.be/zBzSLrciHHg?si=ghg7ZfYxz4RDdllk"
+        target="_blank"
+        class="video-link"
+    >
+
+        <img
+            src="images/huckleberry-finn-cover.png"
+            alt="Historical cover of The Adventures of Huckleberry Finn"
+        >
+
+        <h3>🎥 Click Here to Watch the Historical Video</h3>
+
+    </a>
+
+    <p>
+        Click the image or the text above to open the historical video
+        on YouTube.
+    </p>
+
+</div>
+<p>
+
+Click the button below to open the video on YouTube and learn more about
+Mark Twain, the Mississippi River, and the historical world connected to
+<i>The Adventures of Huckleberry Finn</i>.
+
+</p>
+
+<a
+href="https://youtu.be/zBzSLrciHHg?si=ghg7ZfYxz4RDdllk"
+target="_blank"
+class="video-button"
+
+
+▶ Click Here to Watch the Historical Video
+
+</a>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>🎙️ Student Narration</h2>
+
+<div class="student-narration">
+    Student Narration: Welcome to our virtual museum...
+</div>
+
+<p id="narration">
+
+Welcome to River of History, a digital museum exploring the historical
+context of <i>The Adventures of Huckleberry Finn</i>.
+
+This museum takes visitors back to the world of the nineteenth-century
+American South. Through different exhibits, we explore the importance of
+the Mississippi River, the growth of river transportation and trade, the
+experiences of enslaved people, and the life and background of Mark Twain.
+
+The Mississippi River was an important part of transportation, commerce,
+employment, and everyday life. It was also the setting for Huck and Jim's
+journey, making it an important symbol of movement, danger, and freedom.
+
+The history of slavery is also essential to understanding the novel.
+Jim's journey toward freedom reflects the realities of a society in which
+enslaved people were denied their basic freedom and treated as property.
+
+Finally, Mark Twain's personal experiences on the Mississippi River helped
+influence his writing. His knowledge of riverboats, river towns, and the
+people who lived along the river helped create the historical world of the
+novel.
+
+As you explore this museum, remember that understanding history helps us
+better understand literature. The setting, characters, conflicts, and
+themes of <i>The Adventures of Huckleberry Finn</i> are connected to the
+real history of nineteenth-century America.
+
+Thank you for visiting River of History.
+
+</p>
+
+<button onclick="speakIntro()">
+▶ Play Narration
+</button>
+
+<button onclick="window.speechSynthesis.cancel()">
+⏹ Stop
+</button>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+River of History: The World Behind Huckleberry Finn
+</p>
+
+<p>
+Historical Context Digital Museum
+</p>
+
+<p>
+Created for educational purposes
+</p>
+
+</footer>
+
+<div class="modal" id="modal">
+
+<div class="modal-content">
+
+<span class="close" onclick="closeModal()">×</span>
+
+<div id="modalText"></div>
+
+</div>
+
+</div>
+
+<script>
+
+function speak(text) {
+
+let speech = new SpeechSynthesisUtterance(text);
+
+speech.rate = 0.9;
+
+speech.pitch = 1;
+
+window.speechSynthesis.speak(speech);
+
+}
+
+function speakIntro() {
+
+speak(
+"Welcome to River of History, a digital museum exploring the historical context of The Adventures of Huckleberry Finn. This museum examines the Mississippi River, slavery, Mark Twain's background, and the history connected to the novel."
+);
+
+}
+
+function speakSlavery() {
+
+speak(
+"Slavery was a powerful legal, economic, and social system in the United States. Enslaved people were denied freedom and were forced to work. Jim's journey toward freedom is one of the most important historical elements of The Adventures of Huckleberry Finn."
+);
+
+}
+
+function openModal(room) {
+
+let text = "";
+
+if (room === "novel") {
+
+text = `
+
+<img
+src="images/huckleberry-finn-cover.png"
+alt="The Adventures of Huckleberry Finn book cover"
+>
+
+<h2>📖 The Novel</h2>
+
+<p>
+The Adventures of Huckleberry Finn follows Huck Finn as he travels down
+the Mississippi River with Jim. Their journey allows readers to explore
+American society and the historical problems of the time.
+</p>
+
+<p>
+The river acts as both a physical setting and a symbol of movement,
+escape, and freedom. Through the journey, the novel examines questions
+about morality, society, slavery, and individual choice.
+</p>
+
+`;
+
+}
+
+if (room === "river") {
+
+text = `
+
+<img
+src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Steamboat_on_the_Mississippi.jpg"
+alt="Historical steamboat on the Mississippi River"
+>
+
+<h2>🌊 Mississippi River Life</h2>
+
+<p>
+The Mississippi River was an important transportation and trade route.
+Steamboats carried passengers and goods between communities, connecting
+people and businesses across the region.
+</p>
+
+<p>
+Life on the river could be dangerous because of storms, changing water
+levels, accidents, strong currents, and other boats.
+</p>
+
+`;
+
+}
+
+if (room === "journey") {
+
+text = `
+
+<img
+src="images/mississippi-river-map.png"
+alt="Map showing Huck and Jim's journey"
+>
+
+<h2>🗺️ Huck and Jim's Journey</h2>
+
+<p>
+The river journey takes the characters through different communities and
+social environments.
+</p>
+
+<p>
+The journey helps reveal the differences between freedom and slavery,
+law and morality, and society and individual conscience. The river becomes
+a symbol of movement and the possibility of escaping an unfair society.
+</p>
+
+`;
+
+}
+
+if (room === "slavery") {
+
+text = `
+
+<img
+src="images/slavery-history.png"
+alt="Historical image representing the history of slavery"
+
+
+<h2>⚖️ Slavery</h2>
+
+<p>
+Slavery shaped the society in which the novel takes place. Enslaved people
+were denied legal freedom and were often separated from their families.
+</p>
+
+<p>
+Jim's attempt to reach freedom is central to the historical context of the
+story. His journey helps readers think about the human consequences of
+slavery and the meaning of freedom.
+</p>
+
+`;
+
+}
+
+document.getElementById("modalText").innerHTML = text;
+
+document.getElementById("modal").style.display = "flex";
+
+}
+
+function closeModal() {
+
+document.getElementById("modal").style.display = "none";
+
+}
+
+window.onclick = function(event) {
+
+let modal = document.getElementById("modal");
+
+if (event.target === modal) {
+
+modal.style.display = "none";
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>
